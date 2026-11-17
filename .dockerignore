@@ -1,0 +1,48 @@
+# Keep secrets and runtime state out of the image: the entrypoint copies the image's files over
+# /data on every start, so anything listed here that slipped in would overwrite your live copy.
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.DS_Store
+.vscode
+.idea
+
+# Secrets
+users
+access_token.txt
+token_meta.json
+settings.json
+settings.backup-*.json
+phone_key.txt
+.env
+
+# Runtime state, logs, generated output
+*.pid
+STOP
+STOP_SCALP
+status.json
+scalp_status.json
+scalp_state.json
+positions.json
+state.json
+agents.json
+*.log
+*.tmp
+trades.csv
+scalp_trades.csv
+backtest_trades.csv
+scalp_backtest_trades.csv
+scalp_rejections.csv
+backups
+
+# Not needed to run
+Dockerfile
+docker-compose.yml
+.dockerignore
+Start Kite Bot.command
+
+# Server deploy files (not needed inside the image)
+.github
+deploy/.env

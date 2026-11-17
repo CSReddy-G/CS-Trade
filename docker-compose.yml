@@ -1,0 +1,21 @@
+services:
+  kitebot:
+    build: .
+    image: kitebot:latest
+    container_name: kitebot
+    restart: unless-stopped
+    init: true                 # reaps the bot/backtest child processes
+    ports:
+      - "8765:8765"            # keep both sides 8765: the Kite redirect URL and host check use it
+    environment:
+      TZ: Asia/Kolkata
+      # Your computer's Wi-Fi IP, so the startup log prints a phone link that works.
+      KITEBOT_HOST_IP: ${KITEBOT_HOST_IP:-}
+      # Extra hostnames allowed to reach the panel (comma-separated), if you use one.
+      KITEBOT_ALLOWED_HOSTS: ${KITEBOT_ALLOWED_HOSTS:-}
+    volumes:
+      - kitebot-data:/data
+    stop_grace_period: 30s
+
+volumes:
+  kitebot-data:
